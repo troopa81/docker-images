@@ -1,5 +1,7 @@
 #!/bin/bash
 
+INIT=$1
+
 ############# Execute custom scripts ##############
 function runUserScripts {
 
@@ -194,7 +196,12 @@ else
   echo "#####################################"
 fi;
 
-echo "The following output is now a tail of the alert.log:"
-tail -f $ORACLE_BASE/diag/rdbms/*/*/trace/alert*.log &
-childPID=$!
-wait $childPID
+if [ -n "$INIT" ]
+then
+    echo "Initialization finalized"
+else
+    echo "The following output is now a tail of the alert.log:"
+    tail -f $ORACLE_BASE/diag/rdbms/*/*/trace/alert*.log &
+    childPID=$!
+    wait $childPID
+fi
