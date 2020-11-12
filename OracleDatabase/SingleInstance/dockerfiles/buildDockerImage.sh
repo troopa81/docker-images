@@ -213,7 +213,7 @@ echo "Building image '$IMAGE_NAME' ..."
 
 # BUILD THE IMAGE (replace all environment variables)
 BUILD_START=$(date '+%s')
-docker build --force-rm=true --no-cache=true \
+docker build --force-rm=true  \
        $DOCKEROPS $PROXY_SETTINGS --build-arg DB_EDITION=$EDITION \
        -t $IMAGE_NAME -f $DOCKERFILE . || {
   echo ""
